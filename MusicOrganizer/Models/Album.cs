@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace MusicOrganizer.Models
 {
   public class Album
@@ -19,7 +20,7 @@ namespace MusicOrganizer.Models
     {
       _instances.Clear();
     }
-    public static Item Find(int searchId)
+    public static Album Find(int searchId)
     {
       return _instances[searchId - 1];
     }

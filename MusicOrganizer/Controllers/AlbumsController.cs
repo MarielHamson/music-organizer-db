@@ -20,14 +20,14 @@ namespace MusicOrganizer.Controllers
       Artist artist = Artist.Find(artistId);
       Dictionary<string, object> model = new Dictionary<string, object>();
       model.Add("album", album);
-      model.Add("category", category);
+      model.Add("artist", artist);
       return View(model);
     }
 
     [HttpPost("/albums/delete")]
     public ActionResult DeleteAll()
     {
-      Item.ClearAll();
+      Album.ClearAll();
       return View();
     }
   }

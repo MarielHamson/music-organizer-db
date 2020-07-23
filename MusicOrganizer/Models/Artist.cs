@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace MusicOrganizer.Models
 {
   public class Artist
@@ -9,7 +11,7 @@ namespace MusicOrganizer.Models
 
     public Artist(string artistName)
     {
-      Name = artistName;
+      ArtistName = artistName;
       _instances.Add(this);
       Id = _instances.Count;
       Albums = new List<Album> { };
@@ -32,7 +34,7 @@ namespace MusicOrganizer.Models
 
     public void AddAlbum(Album album)
     {
-      Albums.Add(album)
+      Albums.Add(album);
     }
   }
 }
