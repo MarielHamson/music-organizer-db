@@ -6,5 +6,6 @@ namespace MusicOrganizer.Controllers
 {
   public class AlbumsController : Controller
   {
+
   }
 }
