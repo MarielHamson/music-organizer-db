@@ -1,6 +1,6 @@
-namespace ProjectName.Models
+namespace MusicOrganizer.Models
 {
-  public class ClassName
+  public class Album
   {
 
     // properties, methods, etc. will go here.

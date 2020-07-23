@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ProjectName.Models;
+using MusicOrganizer.Models;
 
-namespace ProjectName.Tests
+namespace MusicOrganizer.Tests
 {
   [TestClass]
   public class ClassNameTests
