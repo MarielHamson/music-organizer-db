@@ -9,8 +9,8 @@ namespace MusicOrganizer.Controllers
     [HttpGet("/artists")]
     public ActionResult Index()
     {
-      List<Album> allAlbums = Album.GetAll();
-      return View(allAlbums);
+      List<Artist> allArtists = Artist.GetAll();
+      return View(allArtists);
     }
 
     [HttpGet("/artists/new")]
