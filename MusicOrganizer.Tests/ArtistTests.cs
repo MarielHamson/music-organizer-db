@@ -99,5 +99,30 @@ namespace MusicOrganizer.Tests
       Artist foundArtist = Artist.Find(newArtist2.Id);
       Assert.AreEqual(newArtist2, foundArtist);
     }
+
+    [TestMethod]
+    public void GetArtistAlbums_ReturnsAlbumsForArtistFromDatabase_List()
+    {
+      Artist newArtist1 = new Artist("Radiohead");
+      Artist newArtist2 = new Artist("Prince");
+      newArtist1.Save();
+      newArtist2.Save();
+      Album newAlbum1 = new Album("OK Computer");
+      Album newAlbum2 = new Album("The Bends");
+      Album newAlbum3 = new Album("Purple Rain");
+      newAlbum1.ArtistId = newArtist1.Id;
+      newAlbum2.ArtistId = newArtist1.Id;
+      newAlbum3.ArtistId = newArtist2.Id;
+      newAlbum1.Save();
+      newAlbum2.Save();
+      newAlbum3.Save();
+      List<Album> newList = new List<Album> { newAlbum1, newAlbum2 };
+      List<Album> results = newArtist1.GetArtistAlbums();
+      Console.WriteLine(newArtist1.Id);
+      Console.WriteLine(newAlbum1.ArtistId);
+      Console.WriteLine(newList.Count);
+      Console.WriteLine(results.Count);
+      CollectionAssert.AreEqual(newList, results);
+    }
   }
 }

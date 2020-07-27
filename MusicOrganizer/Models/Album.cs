@@ -7,15 +7,25 @@ namespace MusicOrganizer.Models
   {
     public string AlbumTitle { get; set; }
     public int Id { get; set; }
+    public int ArtistId { get; set; }
     public Album(string albumTitle)
     {
       AlbumTitle = albumTitle;
+      ArtistId = 0;
     }
 
     public Album(string albumTitle, int id)
     {
       AlbumTitle = albumTitle;
       Id = id;
+      ArtistId = 0;
+    }
+
+    public Album(string albumTitle, int id, int artistId)
+    {
+      AlbumTitle = albumTitle;
+      Id = id;
+      ArtistId = artistId;
     }
 
     public static List<Album> GetAll()
@@ -59,11 +69,15 @@ namespace MusicOrganizer.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO albums (albumTitle) VALUES (@AlbumTitle);";
+      cmd.CommandText = @"INSERT INTO albums (albumTitle, artistId) VALUES (@AlbumTitle, @ArtistId);";
       MySqlParameter albumTitle = new MySqlParameter();
       albumTitle.ParameterName = "@AlbumTitle";
       albumTitle.Value = this.AlbumTitle;
+      MySqlParameter artistId = new MySqlParameter();
+      artistId.ParameterName = "@ArtistId";
+      artistId.Value = this.ArtistId;
       cmd.Parameters.Add(albumTitle);
+      cmd.Parameters.Add(artistId);
       cmd.ExecuteNonQuery();
       Id = (int)cmd.LastInsertedId;
 

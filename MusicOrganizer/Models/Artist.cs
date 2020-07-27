@@ -119,5 +119,30 @@ namespace MusicOrganizer.Models
       }
       return foundArtist;
     }
+
+    public List<Album> GetArtistAlbums()
+    {
+      List<Album> artistAlbums = new List<Album> { };
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM `albums` WHERE artistId = @thisId;";
+      MySqlParameter thisId = new MySqlParameter();
+      thisId.ParameterName = "@thisId";
+      thisId.Value = Id;
+      cmd.Parameters.Add(thisId);
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while (rdr.Read())
+      {
+        Album newAlbum = new Album(rdr.GetString(1), rdr.GetInt32(0), rdr.GetInt32(2));
+        artistAlbums.Add(newAlbum);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return artistAlbums;
+    }
   }
 }
