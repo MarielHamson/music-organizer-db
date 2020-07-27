@@ -1,8 +1,8 @@
 using System;
 using MySql.Data.MySqlClient;
-using ToDoList;
+using MusicOrganizer;
 
-namespace ToDoList.Models
+namespace MusicOrganizer.Models
 {
   public class DB
   {
