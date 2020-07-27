@@ -87,9 +87,31 @@ namespace MusicOrganizer.Models
         return (albumTitleEquality && idEquality);
       }
     }
-    /*     public static Album Find(int searchId)
-        {
-
-        } */
+    public static Album Find(int searchId)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM albums WHERE id = @thisId;";
+      MySqlParameter thisId = new MySqlParameter();
+      thisId.ParameterName = "@thisId";
+      thisId.Value = searchId;
+      cmd.Parameters.Add(thisId);
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int albumId = 0;
+      string albumTitle = "";
+      while (rdr.Read())
+      {
+        albumId = rdr.GetInt32(0);
+        albumTitle = rdr.GetString(1);
+      }
+      Album foundAlbum = new Album(albumTitle, albumId);
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return foundAlbum;
+    }
   }
 }
