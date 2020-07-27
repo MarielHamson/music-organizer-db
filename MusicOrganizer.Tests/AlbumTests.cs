@@ -11,7 +11,7 @@ namespace MusicOrganizer.Tests
   {
     public void Dispose()
     {
-
+      Album.ClearAll();
     }
     public void AlbumTest()
     {
@@ -75,6 +75,18 @@ namespace MusicOrganizer.Tests
       List<Album> result = Album.GetAll();
       List<Album> testList = new List<Album> { testAlbum };
       CollectionAssert.AreEqual(testList, result);
+    }
+
+    [TestMethod]
+    public void GetAll_ReturnsAlbums_AlbumList()
+    {
+      Album newAlbum1 = new Album("OK Computer");
+      Album newAlbum2 = new Album("The Bends");
+      newAlbum1.Save();
+      newAlbum2.Save();
+      List<Album> newList = new List<Album> { newAlbum1, newAlbum2 };
+      List<Album> result = Album.GetAll();
+      CollectionAssert.AreEqual(newList, result);
     }
   }
 }
