@@ -66,5 +66,15 @@ namespace MusicOrganizer.Tests
       //Assert
       CollectionAssert.AreEqual(newList, result);
     }
+
+    [TestMethod]
+    public void Save_SavesToDatabase_AlbumList()
+    {
+      Album testAlbum = new Album("Purple Rain");
+      testAlbum.Save();
+      List<Album> result = Album.GetAll();
+      List<Album> testList = new List<Album> { testAlbum };
+      CollectionAssert.AreEqual(testList, result);
+    }
   }
 }

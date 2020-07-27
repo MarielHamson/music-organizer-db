@@ -6,7 +6,7 @@ namespace MusicOrganizer.Models
   public class Album
   {
     public string AlbumTitle { get; set; }
-    public int Id { get; }
+    public int Id { get; set; }
     public Album(string albumTitle)
     {
       AlbumTitle = albumTitle;
@@ -43,6 +43,40 @@ namespace MusicOrganizer.Models
     public static void ClearAll()
     {
 
+    }
+
+    public void Save()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO albums (albumTitle) VALUES (@AlbumTitle);";
+      MySqlParameter albumTitle = new MySqlParameter();
+      albumTitle.ParameterName = "@AlbumTitle";
+      albumTitle.Value = this.AlbumTitle;
+      cmd.Parameters.Add(albumTitle);
+      cmd.ExecuteNonQuery();
+      Id = (int)cmd.LastInsertedId;
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    public override bool Equals(System.Object otherAlbum)
+    {
+      if (!(otherAlbum is Album))
+      {
+        return false;
+      }
+      {
+        Album newAlbum = (Album)otherAlbum;
+        bool albumTitleEquality = (this.AlbumTitle == newAlbum.AlbumTitle);
+        bool idEquality = (this.Id == newAlbum.Id);
+        return (albumTitleEquality && idEquality);
+      }
     }
     /*     public static Album Find(int searchId)
         {
