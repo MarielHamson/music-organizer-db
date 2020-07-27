@@ -54,7 +54,7 @@ namespace MusicOrganizer.Tests
       Assert.AreEqual(updatedTitle, result);
     }
 
-    /* [TestMethod]
+    [TestMethod]
     public void GetAll_ReturnsEmptyListFromDatabase_AlbumList()
     {
       //Arrange
@@ -65,6 +65,6 @@ namespace MusicOrganizer.Tests
 
       //Assert
       CollectionAssert.AreEqual(newList, result);
-    } */
+    }
   }
 }
